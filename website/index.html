@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive results dashboard for a credit card default classification project.">
+  <meta name="theme-color" content="#183b31">
+  <title>Credit Card Default Prediction | AI Applications Lab</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Credit Card Default Prediction home">
+      <span class="brand-mark" aria-hidden="true">ML</span>
+      <span class="brand-copy"><strong>Applied ML</strong><small>AI Applications Lab · 26ECP-102</small></span>
+    </a>
+    <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#results">Results</a><a href="#method">Method</a><a href="#limits">Limitations</a></nav>
+    <span class="project-tag">DOEF-1 <span>SECTION 1A</span></span>
+  </header>
+
+  <main id="main">
+    <section class="hero page-width" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><i></i> PROJECT 01 <span>/</span> CLASSIFICATION</p>
+        <h1 id="hero-title">Credit card<br><em>default prediction</em></h1>
+        <p class="hero-summary">A notebook-based comparison of three machine learning models for identifying clients who may miss a credit card payment.</p>
+        <div class="hero-actions"><a class="button button-light" href="#results">Explore results <b>↘</b></a><a class="text-link" href="#method">View the workflow</a></div>
+        <div class="hero-meta"><div><span>Dataset</span><strong>Default of Credit Card Clients</strong></div><div><span>Test split</span><strong>20% · stratified</strong></div><div><span>Models</span><strong>3 classifiers</strong></div></div>
+      </div>
+      <aside class="winner-card" aria-label="Top reported model">
+        <div class="winner-card-top"><span class="winner-label">TOP ROC-AUC</span><span class="winner-stamp">SAVED RUN</span></div>
+        <div class="winner-model">XGBoost</div><div class="winner-score">0.7782</div>
+        <p class="winner-caption">Highest reported test ROC-AUC</p>
+        <div class="mini-comparison" aria-hidden="true">
+          <div class="mini-row"><span>Logistic</span><span class="mini-track"><i style="width:70.76%"></i></span><b>.7076</b></div>
+          <div class="mini-row"><span>Forest</span><span class="mini-track"><i style="width:75.63%"></i></span><b>.7563</b></div>
+          <div class="mini-row is-winner"><span>XGBoost</span><span class="mini-track"><i style="width:77.82%"></i></span><b>.7782</b></div>
+        </div>
+        <div class="winner-foot"><i></i> Best in this saved run</div>
+      </aside>
+      <div class="hero-orbit orbit-one" aria-hidden="true"></div><div class="hero-orbit orbit-two" aria-hidden="true"></div>
+    </section>
+
+    <section class="stats page-width" id="overview" aria-label="Dataset and experiment summary">
+      <article class="stat-block"><strong>30,000</strong><span>client records</span><small>Loaded from the notebook CSV</small></article>
+      <article class="stat-block"><strong>23</strong><span>source predictors</span><small>ID and target excluded</small></article>
+      <article class="stat-block"><strong>6,000</strong><span>held-out rows</span><small>20% test split</small></article>
+      <article class="stat-block stat-highlight"><strong>0.7782</strong><span>best ROC-AUC</span><small>XGBoost in saved run</small></article>
+    </section>
+
+    <section class="section page-width" id="results" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="section-kicker">01 / EVALUATION</p><h2 id="results-title">Three models, one test set</h2><p class="section-intro">Accuracy, precision, recall, and ROC-AUC from the notebook’s recorded 80/20 stratified split.</p></div><div class="saved-run"><i></i> Saved notebook results</div></div>
+      <div class="results-grid">
+        <div class="chart-panel">
+          <div class="panel-head"><div><h3>Metric comparison</h3><p id="metric-description">Ability to rank defaulters above non-defaulters across thresholds.</p></div><span class="chart-unit">SCORE / 1.00</span></div>
+          <div class="metric-switch" role="group" aria-label="Choose a metric">
+            <button type="button" data-metric="auc" aria-pressed="true">ROC-AUC</button><button type="button" data-metric="accuracy" aria-pressed="false">Accuracy</button><button type="button" data-metric="precision" aria-pressed="false">Precision</button><button type="button" data-metric="recall" aria-pressed="false">Recall</button>
+          </div>
+          <div class="chart-scale"><span>0</span><span>.25</span><span>.50</span><span>.75</span><span>1.00</span></div>
+          <div id="metric-bars" class="metric-bars" aria-live="polite"></div>
+          <p class="chart-footnote">Edit scores (0–1) or drag a row / use arrows to reorder. Changes are saved in this browser.</p>
+        </div>
+        <aside class="insight-panel"><p class="section-kicker">RUN READOUT</p><h3>XGBoost leads on ROC-AUC</h3><p>It recorded <strong>0.7782 ROC-AUC</strong>, along with the highest accuracy and recall in this run.</p><div class="insight-rule"></div><div class="insight-stat"><strong>35.72%</strong><span>recall at the notebook’s default threshold</span></div><p class="insight-note">At that threshold, the model identified about 36% of actual defaulters in the test set. Changing the threshold changes the precision–recall trade-off.</p></aside>
+      </div>
+      <div class="table-wrap"><table><caption>Reported test-set metrics from the notebook</caption><thead><tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">ROC-AUC</th></tr></thead><tbody>
+        <tr><th scope="row">Logistic Regression</th><td>0.8077</td><td>0.6868</td><td>0.2396</td><td>0.7076</td></tr>
+        <tr><th scope="row">Random Forest</th><td>0.8148</td><td>0.6530</td><td>0.3474</td><td>0.7563</td></tr>
+        <tr class="best-row"><th scope="row">XGBoost <span class="table-badge">TOP AUC</span></th><td>0.8175</td><td>0.6620</td><td>0.3572</td><td>0.7782</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section class="section page-width dataset-section" aria-labelledby="dataset-title">
+      <div class="section-heading compact-heading"><div><p class="section-kicker">02 / DATA</p><h2 id="dataset-title">Signals in the dataset</h2><p class="section-intro">The notebook removes the client ID and uses the remaining source predictors to model next-month default.</p></div><a class="source-link" href="https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset" target="_blank" rel="noreferrer">View Kaggle dataset ↗</a></div>
+      <div class="feature-layout"><div class="feature-groups">
+        <article class="feature-group"><span>A</span><div><h3>Client profile</h3><p>Age, gender, education, and marital-status codes.</p></div></article>
+        <article class="feature-group"><span>B</span><div><h3>Repayment history</h3><p>Monthly repayment-status fields from the prior six months.</p></div></article>
+        <article class="feature-group"><span>C</span><div><h3>Credit and bills</h3><p>Credit limit, bill amounts, and previous payment amounts.</p></div></article>
+      </div><div class="target-card"><span class="target-overline">PREDICTION TARGET</span><code>default.payment.next.month</code><div class="target-values"><span><i class="no-default"></i><b>0</b> No default</span><span><i class="default"></i><b>1</b> Default</span></div><p>The notebook treats this as a binary classification label.</p></div></div>
+    </section>
+
+    <section class="section page-width" id="method" aria-labelledby="method-title">
+      <div class="section-heading compact-heading"><div><p class="section-kicker">03 / WORKFLOW</p><h2 id="method-title">From CSV to model comparison</h2><p class="section-intro">The site reflects the steps implemented in the supplied notebook.</p></div></div>
+      <ol class="workflow">
+        <li><span>01</span><h3>Inspect</h3><p>Load the CSV and check shape, columns, missing values, and target distribution.</p></li>
+        <li><span>02</span><h3>Prepare</h3><p>Drop ID, one-hot encode categories, replace infinite values, then split 80/20 with stratification.</p></li>
+        <li><span>03</span><h3>Train</h3><p>Fit Logistic Regression, Random Forest, and XGBoost pipelines with median imputation.</p></li>
+        <li><span>04</span><h3>Evaluate</h3><p>Compare four metrics and inspect the leading model’s classification report.</p></li>
+      </ol>
+      <div class="metric-definitions"><div><strong>Accuracy</strong><span>Share of all predictions that are correct.</span></div><div><strong>Precision</strong><span>Share of predicted defaulters who actually default.</span></div><div><strong>Recall</strong><span>Share of actual defaulters the model identifies.</span></div><div><strong>ROC-AUC</strong><span>How well a model ranks positive cases across thresholds.</span></div></div>
+    </section>
+
+    <section class="limitations page-width" id="limits" aria-labelledby="limits-title">
+      <div class="limits-heading"><p class="section-kicker">04 / READ WITH CARE</p><h2 id="limits-title">A project result, not a lending decision</h2><p>The saved notebook does not export a trained model, so this page reports results and does not score new customers.</p></div>
+      <div class="limits-list">
+        <article><span>01</span><p><strong>Low default recall.</strong> XGBoost recall is 0.3572 at the default threshold. Accuracy alone hides missed defaulters.</p></article>
+        <article><span>02</span><p><strong>Test-set model selection.</strong> The notebook picks its top model by test ROC-AUC. Select on validation data, then reserve test data for final evaluation.</p></article>
+        <article><span>03</span><p><strong>Preprocessing order.</strong> One-hot encoding happens before the split. Fit preprocessing within each training fold for a cleaner evaluation pipeline.</p></article>
+        <article><span>04</span><p><strong>Different class handling.</strong> Random Forest uses balanced class weights; the other models do not, so settings differ.</p></article>
+        <article><span>05</span><p><strong>Limited generalization.</strong> The Kaggle dataset describes Taiwan clients from 2005. Real use needs current representative data, fairness and privacy review, and human oversight.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer class="footer page-width"><a class="brand" href="#top"><span class="brand-mark">ML</span><span class="brand-copy"><strong>Applied ML</strong><small>AI Applications Lab · DOEF-1</small></span></a><p>Credit Card Default Prediction · Section 1A</p><a class="back-top" href="#top">Back to top ↑</a></footer>
+</body>
+</html>
+
+
